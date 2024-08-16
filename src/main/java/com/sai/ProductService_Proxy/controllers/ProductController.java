@@ -55,13 +55,17 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public String updateProduct(@PathVariable("id") Long prodId){
-        return "Updating the  product : "+prodId;
+    public ResponseEntity<Product> updateProduct(@PathVariable("id") Long prodId){
+        Product product = productService.updateProduct(prodId);
+        ResponseEntity<Product> responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
+        return responseEntity;
     }
 
     @PatchMapping("/{id}")
-    public String patchProduct(@PathVariable("id") Long prodId){
-        return "Patching the  product : "+prodId;
+    public ResponseEntity<Product> patchProduct(@PathVariable("id") Long prodId){
+        Product product = productService.updateProduct(prodId);
+        ResponseEntity<Product> responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
+        return responseEntity;
     }
 
     @DeleteMapping("/{id}")

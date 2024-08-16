@@ -12,7 +12,7 @@ public interface IProductService {
 
     Product addNewProduct(ProductDto productDto);
 
-    String updateProduct(Long productId);
+    Product updateProduct(Long productId);
 
     String deleteProduct(Long productId);
 }

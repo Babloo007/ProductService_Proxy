@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class ProductService implements IProductService {
 
-    private RestTemplateBuilder restTemplateBuilder;
+    private final RestTemplateBuilder restTemplateBuilder;
 
     public ProductService(RestTemplateBuilder restTemplateBuilder){
         this.restTemplateBuilder = restTemplateBuilder;
@@ -39,8 +39,7 @@ public class ProductService implements IProductService {
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<ProductDto> productDto = restTemplate.getForEntity("https://fakestoreapi.com/products/{productId}", ProductDto.class, productId);
 
-        Product product = getProduct(productDto.getBody());
-        return product;
+        return getProduct(productDto.getBody());
     }
 
     @Override
@@ -48,17 +47,23 @@ public class ProductService implements IProductService {
         RestTemplate restTemplate = restTemplateBuilder.build();
         restTemplate.postForEntity("https://fakestoreapi.com/products", productDto, ProductDto.class);
 
-        Product product = getProduct(productDto);
-        return product;
+        return getProduct(productDto);
     }
 
     @Override
-    public String updateProduct(Long productId){
-        return null;
+    public Product updateProduct(Long productId){
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        restTemplate.put("https://fakestoreapi.com/products/{productId}", ProductDto.class, productId);
+        ResponseEntity<ProductDto> productDto = restTemplate.getForEntity("https://fakestoreapi.com/products/{productId}", ProductDto.class, productId);
+
+        return getProduct(productDto.getBody());
     }
 
     @Override
     public String deleteProduct(Long productId){
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        restTemplate.delete("https://fakestoreapi.com/products/{productId}");
+
         return null;
     }
 
