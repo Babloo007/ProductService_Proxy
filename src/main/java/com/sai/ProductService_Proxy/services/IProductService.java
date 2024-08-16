@@ -1,13 +1,16 @@
 package com.sai.ProductService_Proxy.services;
 
 import com.sai.ProductService_Proxy.dtos.ProductDto;
+import com.sai.ProductService_Proxy.models.Product;
+
+import java.util.List;
 
 public interface IProductService {
-    String getAllProducts();
+    List<Product> getAllProducts();
 
-    String getSingleProduct(Long productId);
+    Product getSingleProduct(Long productId);
 
-    String addNewProduct(ProductDto productDto);
+    Product addNewProduct(ProductDto productDto);
 
     String updateProduct(Long productId);
 
