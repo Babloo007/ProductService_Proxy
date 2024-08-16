@@ -1,5 +1,7 @@
 package com.sai.ProductService_Proxy.services;
 
+import com.sai.ProductService_Proxy.clients.fakeStore.dto.FakeStoreProductDto;
+import com.sai.ProductService_Proxy.clients.fakeStore.dto.IClientProductDto;
 import com.sai.ProductService_Proxy.dtos.ProductDto;
 import com.sai.ProductService_Proxy.models.Product;
 
@@ -10,9 +12,9 @@ public interface IProductService {
 
     Product getSingleProduct(Long productId);
 
-    Product addNewProduct(ProductDto productDto);
+    Product addNewProduct(Product product);
 
-    Product updateProduct(Long productId);
+    Product updateProduct(Long productId, Product product);
 
     String deleteProduct(Long productId);
 }
