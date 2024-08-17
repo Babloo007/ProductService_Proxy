@@ -1,11 +1,9 @@
 package com.sai.ProductService_Proxy.controllers;
 
-import com.sai.ProductService_Proxy.clients.fakeStore.dto.FakeStoreProductDto;
-import com.sai.ProductService_Proxy.clients.fakeStore.dto.IClientProductDto;
 import com.sai.ProductService_Proxy.dtos.ProductDto;
 import com.sai.ProductService_Proxy.models.Categories;
 import com.sai.ProductService_Proxy.models.Product;
-import com.sai.ProductService_Proxy.services.FakeStoreProductService;
+import com.sai.ProductService_Proxy.services.IProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -18,9 +16,9 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    FakeStoreProductService productService;
+    IProductService productService;
 
-    ProductController(FakeStoreProductService productService){
+    ProductController(IProductService productService){
         this.productService = productService;
     }
 
@@ -53,17 +51,10 @@ public class ProductController {
     @PostMapping()
     public ResponseEntity<Product> addNewProduct(@RequestBody ProductDto productDto){
 
-        Product productIn = new Product();
-        productIn.setId(productDto.getId());
-        productIn.setImageUrl(productDto.getImageUrl());
-        productIn.setDescription(productDto.getDescription());
-        productIn.setTitle(productDto.getTitle());
-        productIn.setPrice(productDto.getPrice());
-        productIn.setCategory(new Categories());
-        productIn.getCategory().setName(productDto.getCategory());
+        Product product = getProduct(productDto);
 
         try {
-            Product product = productService.addNewProduct(productIn);
+            product = productService.addNewProduct(product);
             ResponseEntity<Product> responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
             return responseEntity;
         } catch (Exception e){
@@ -105,5 +96,19 @@ public class ProductController {
         }catch(Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private Product getProduct(ProductDto productDto) {
+        Product product = new Product();
+        product.setId(productDto.getId());
+        product.setTitle(productDto.getTitle());
+        product.setPrice(productDto.getPrice());
+        product.setDescription(productDto.getDescription());
+        Categories category = new Categories();
+        category.setName(String.valueOf(product.getCategory()));
+        product.setCategory(category);
+        product.setImageUrl(productDto.getImageUrl());
+
+        return product;
     }
 }
