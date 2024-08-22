@@ -13,13 +13,13 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 
     Product findProductById(Long id);
 
-    List<Product> findByPriceBetween(Long id);
+    Product findByPriceBetween(double start, double end);
 
-    Product findByProductName(String productName);
+//    Product findByProductTitle(String productTitle);
 
     String findTitleById(Long id);
 
-    List<Product> findByIdIsNotNullOrderByPrice(Long id);
+//    List<Product> findByIdIsNotNullOrderByPrice(Long id);
 
-    List<Product> findAllByIsPublicFalse();
+//    List<Product> findAllByIsPublicFalse();
 }

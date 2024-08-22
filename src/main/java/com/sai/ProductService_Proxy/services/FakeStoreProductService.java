@@ -32,7 +32,7 @@ public class FakeStoreProductService implements IProductService {
     @Override
     public List<Product> getAllProducts(){
 
-        List<FakeStoreProductDto> fakeStoreProductDtos= fakeStoreClient.getAllProducts();
+        List<FakeStoreProductDto> fakeStoreProductDtos = fakeStoreClient.getAllProducts();
         List<Product> products = new ArrayList<>();
 
         for(FakeStoreProductDto productDto : fakeStoreProductDtos){
