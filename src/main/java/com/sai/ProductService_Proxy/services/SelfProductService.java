@@ -17,12 +17,12 @@ public class SelfProductService implements IProductService{
 
     @Override
     public List<Product> getAllProducts() {
-        return List.of();
+        return productRepo.findAll();
     }
 
     @Override
     public Product getSingleProduct(Long productId) {
-        return null;
+        return productRepo.findProductById(productId);
     }
 
     @Override
@@ -33,11 +33,21 @@ public class SelfProductService implements IProductService{
 
     @Override
     public Product updateProduct(Long productId, Product product) {
-        return null;
+        Product productToUpdate = productRepo.findProductById(productId);
+        productToUpdate.setTitle(product.getTitle());
+        productToUpdate.setDescription(product.getDescription());
+        productToUpdate.setCategory(product.getCategory());
+        productToUpdate.setPrice(product.getPrice());
+        productToUpdate.setImageUrl(product.getImageUrl());
+        productRepo.save(productToUpdate);
+
+        return productToUpdate;
     }
 
     @Override
     public String deleteProduct(Long productId) {
-        return "";
+
+        productRepo.deleteById(productId);
+        return "Product with id : "+productId+" deleted successfully";
     }
 }

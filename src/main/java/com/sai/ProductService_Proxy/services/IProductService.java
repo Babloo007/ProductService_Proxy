@@ -8,6 +8,7 @@ import com.sai.ProductService_Proxy.models.Product;
 import java.util.List;
 
 public interface IProductService {
+
     List<Product> getAllProducts();
 
     Product getSingleProduct(Long productId);

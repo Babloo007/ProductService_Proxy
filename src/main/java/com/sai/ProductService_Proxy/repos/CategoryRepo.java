@@ -4,12 +4,14 @@ import com.sai.ProductService_Proxy.models.Categories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CategoryRepo extends JpaRepository<Categories, Long> {
 
-    Categories save(Categories category);
+    public Categories save(Categories category);
 
-    Categories findById(long id);
+    public List<Categories> findAll();
 
-
+    public void deleteById(Long id);
 }

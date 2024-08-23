@@ -5,11 +5,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Long> {
 
     public Product save(Product product);
+
+    public List<Product> findAll();
+
+    public Optional<Product> findById(Long id);
+
+    public void deleteById(Long id);
 
     Product findProductById(Long id);
 
