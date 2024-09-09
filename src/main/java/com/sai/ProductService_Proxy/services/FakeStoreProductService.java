@@ -8,6 +8,7 @@ import com.sai.ProductService_Proxy.models.Categories;
 import com.sai.ProductService_Proxy.models.Product;
 import jakarta.annotation.Nullable;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -20,7 +21,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Service
+@Service
+@Primary
 public class FakeStoreProductService implements IProductService {
 
     private final FakeStoreClient fakeStoreClient;

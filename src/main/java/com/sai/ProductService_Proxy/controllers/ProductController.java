@@ -4,6 +4,7 @@ import com.sai.ProductService_Proxy.dtos.ProductDto;
 import com.sai.ProductService_Proxy.models.Categories;
 import com.sai.ProductService_Proxy.models.Product;
 import com.sai.ProductService_Proxy.services.IProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -18,6 +19,7 @@ public class ProductController {
 
     IProductService productService;
 
+    @Autowired
     ProductController(IProductService productService){
         this.productService = productService;
     }
@@ -26,8 +28,9 @@ public class ProductController {
     public ResponseEntity<List<Product>> getAllProducts(){
         try {
             return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
-        } catch(Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch(Exception e){
+            throw new RuntimeException();
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
